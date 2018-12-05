@@ -1,5 +1,6 @@
 package com.example.s_shah.instaclone;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -54,6 +55,9 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener{
 
 
             case R.id.lLogin:
+                final ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setMessage("Logging in");
+                progressDialog.show();
                 ParseUser.logInInBackground(loginEmail.getText().toString(), loginPassWord.getText().toString(), new LogInCallback() {
                     @Override
                     public void done(ParseUser user, ParseException e) {
@@ -65,6 +69,7 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener{
                         }else{
                             FancyToast.makeText(LogIn.this, e.getMessage(), Toast.LENGTH_LONG, FancyToast.ERROR, true).show();
                         }
+                        progressDialog.dismiss();
 
                     }
                 });

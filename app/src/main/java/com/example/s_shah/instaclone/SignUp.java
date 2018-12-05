@@ -58,7 +58,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
                 final ProgressDialog progressDialog = new ProgressDialog(this);
                 progressDialog.setMessage("Signing Up "+ userName.getText().toString());
-                progressDialog.show()
+                progressDialog.show();
                 appUser.signUpInBackground(new SignUpCallback() {
                     @Override
                     public void done(ParseException e) {
@@ -74,7 +74,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                                     true).show();
                         }
                         progressDialog.dismiss();
-                        
+
                     }
                 });
                 break;
