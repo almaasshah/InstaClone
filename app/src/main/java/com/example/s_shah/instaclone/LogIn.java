@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -35,6 +37,16 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener{
         loginPassWord = findViewById(R.id.loginPassWord);
         lLogin = findViewById(R.id.lLogin);
         lSignUp = findViewById(R.id.lSignUp);
+
+        loginPassWord.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN){
+                    onClick(lLogin);
+                }
+                return false;
+            }
+        });
 
         lLogin.setOnClickListener(this);
         lSignUp.setOnClickListener(this);
@@ -74,6 +86,15 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener{
                     }
                 });
                 break;
+        }
+
+    }
+    public void rootLayoutTapped(View view){
+        try{
+            InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        } catch (Exception e){
+            e.printStackTrace();
         }
 
     }
